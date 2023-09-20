@@ -1,0 +1,116 @@
+<!-- 
+Author: Ayaan Raza
+Project: Driver EcoScore for Uber Hackathon
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Driver EcoScore - Sign Up</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+  <script type="module" src="script.js"></script>
+</head>
+
+<body class="information_page">
+  <h1 class="ui center aligned white inverted block header">
+    Driver EcoScore
+    <a href="index.html"> <button class="ui right floated red button" fdprocessedid="30c1d8">Back</button></a>
+  </h1>
+
+  <div class="login-page">
+    <div class="form">
+      <form class="login-form" id="form">
+        <div class="form-group">
+          <input type="text" id="fname" placeholder="First Name" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="text" id="lname" placeholder="Last Name" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="email" id="email" placeholder="Email" class="form-control">
+        </div>
+        <div class="form-group">
+          <input type="password" id="password" placeholder="Password" class="form-control">
+        </div> 
+
+        <button id="submit" type="button" class="btn btn-outline-success btn-lg shadow">Submit</button>
+      </form>
+
+    </div>
+
+  </div>
+
+  <script type="module">
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import {getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+    import {getAuth, createUserWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    const firebaseConfig = {
+      apiKey: "AIzaSyCK5rIsGu_yccBU7mfd75Zt9IFWZBz-iRY",
+      authDomain: "ecoscore-uber.firebaseapp.com",
+      projectId: "ecoscore-uber",
+      storageBucket: "ecoscore-uber.appspot.com",
+      messagingSenderId: "310324664354",
+      appId: "1:310324664354:web:547de9a9ea72e1c2f7927b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase();
+    const auth = getAuth();
+    var email = "";
+    var id = null
+
+    function writeUserData(fname, lname, email, password, id, ecoscore, driver) {
+      const db = getDatabase();
+      set(ref(db, 'users/' + id), {
+        firstname: fname,
+        lastname: lname,
+        email: email,
+        password: password,
+        id: id,
+        ecoscore: ecoscore,
+        uber_driver: driver
+      }).then(() => {
+        window.location.href = "main.html";
+      })
+    }
+
+    function create() {
+
+      email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var fname = document.getElementById("fname").value;
+      var lname = document.getElementById("lname").value;
+      const auth = getAuth();
+      if (email != "" && document.getElementById("fname").value != "" && document.getElementById("lname").value != "" && password != "") {
+        createUserWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            id = user.uid;
+            localStorage.setItem('id', id);
+            writeUserData(fname, lname, email, password, id, 0, false);
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            if (errorCode != null) {
+              alert(errorMessage);
+            } 
+          });
+      } else {
+        alert("Missing Information");
+      }
+    }
+
+
+    var submit = document.getElementById("submit");
+    submit.addEventListener("click", create);
+  </script>
+
+</body>
+
+</html>

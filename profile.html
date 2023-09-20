@@ -1,0 +1,94 @@
+<!-- 
+Author: Ayaan Raza
+Project: Driver EcoScore for Uber Hackathon
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Driver EcoScore - Profile Page</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <h1 class="ui center aligned white inverted block header">
+    Driver EcoScore
+    <a href="main.html"> <button class="ui right floated red button" fdprocessedid="30c1d8">Back</button></a>
+    <a href="index.html"><button class="ui right floated red button" fdprocessedid="30c1d8" id="logout">Log
+        Out</button></a>
+  </h1>
+  <div class="ui segment" id="header">
+    <center>
+      <h1 style="font-size: 40px;" id="name" class="title"></h1>
+    </center><br><br>
+    <p class="title information">Email:</p>
+    <p id="email" class="information"></p>
+    <p></p>
+    <p class="title information">EcoScore:</p>
+    <p id="score" class="information"></p>
+
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/plotly.js/2.26.0/plotly.min.js"></script>
+  <script src="script.js"></script>
+  <script type="module">
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import {getDatabase, ref, get} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+    import {getAuth} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    import {ref as sRef} from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-storage.js';
+
+
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCK5rIsGu_yccBU7mfd75Zt9IFWZBz-iRY",
+      authDomain: "ecoscore-uber.firebaseapp.com",
+      projectId: "ecoscore-uber",
+      storageBucket: "ecoscore-uber.appspot.com",
+      messagingSenderId: "310324664354",
+      appId: "1:310324664354:web:547de9a9ea72e1c2f7927b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase();
+    const auth = getAuth();
+    var id = localStorage.getItem("id");
+    var dataref = ref(database, "users/" + id);
+
+    var title_name = document.getElementById("name");
+    var user_email = document.getElementById("email");
+    var user_ecoscore = document.getElementById("score");
+    var logout_button = document.getElementById("logout");
+
+    function logout() {
+      localStorage.setItem("id", "");
+    }
+
+    get(dataref)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const user = snapshot.val();
+          const firstName = user.firstname;
+          const lastName = user.lastname;
+          const email = user.email;
+          const ecoscore = user.ecoscore;
+          console.log(ecoscore);
+          user_ecoscore.innerText = ecoscore;
+          user_email.innerText = email;
+          title_name.innerText = "Welcome to your home page " + firstName + " " + lastName
+        } else {
+          alert("An error has occured. Please try again later.");
+        }
+      })
+      .catch((error) => {
+        alert("An error has occured. Please try again later. " + error);
+      });
+    logout_button.addEventListener("click", logout);
+
+  </script>
+</body>
+
+</html>

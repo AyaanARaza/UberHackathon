@@ -1,0 +1,82 @@
+<!-- 
+Authors: Vihaan Sharma and Ayaan Raza
+Project: Driver EcoScore for Uber Hackathon
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Results</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="script.js"></script>
+</head>
+
+<body onload="subans()">
+  <h1 class="ui center aligned white inverted block header">
+    Uber Driver EcoScore
+    <a href="main.html"> <button class="ui right floated red button" fdprocessedid="30c1d8">Back</button></a>
+  </h1>
+  <div id='myDiv'></div>
+  <div class="ui sizer vertical segment">
+    <div class="ui huge header" id="setters"></div>
+  </div>
+  <a href="main.html">Take another quiz</a>
+  <script type="module">
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import {getDatabase, ref, get, update} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+    import {getAuth} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+    import {ref as sRef} from 'https://www.gstatic.com/firebasejs/10.4.0/firebase-storage.js';
+
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCK5rIsGu_yccBU7mfd75Zt9IFWZBz-iRY",
+      authDomain: "ecoscore-uber.firebaseapp.com",
+      projectId: "ecoscore-uber",
+      storageBucket: "ecoscore-uber.appspot.com",
+      messagingSenderId: "310324664354",
+      appId: "1:310324664354:web:547de9a9ea72e1c2f7927b"
+    };
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase();
+    const auth = getAuth();
+    var id = localStorage.getItem("id");
+    var score = parseInt(localStorage.getItem("Score"));
+    var dataref = ref(database, "users/" + id);
+    var ecoscore_value;
+
+    function user_score() {
+      update(ref(database, 'users/' + id), {
+        ecoscore: ecoscore_value
+      })
+    }
+
+    get(dataref)
+      .then((snapshot) => {
+        if (snapshot.exists()) {
+          const user = snapshot.val();
+          ecoscore_value = user.ecoscore;
+          if (ecoscore_value == 0) {
+            ecoscore_value = score;
+          } else {
+            ecoscore_value = Math.ceil((ecoscore_value + score) / 2)
+          }
+          user_score();
+        } else {
+          alert("An error has occured. Please try again later.");
+        }
+      })
+      .catch((error) => {
+        alert("An error has occured. Please try again later. " + error);
+      });
+
+  </script>
+</body>
+
+
+</html>

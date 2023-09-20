@@ -1,0 +1,98 @@
+<!-- 
+Author: Ayaan Raza
+Project: Driver EcoScore for Uber Hackathon
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Driver EcoScore - Login</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+  <script type="module" src="script.js"></script>
+</head>
+
+<body class="information_page">
+
+  <h1 class="ui center aligned white inverted block header">
+    Driver EcoScore
+    <a href="index.html"> <button class="ui right floated red button" fdprocessedid="30c1d8">Back</button></a>
+  </h1>
+
+  <div class="login-page">
+    <div class="form">
+      <div class="form-group">
+        <input type="email" id="email" placeholder="Email" class="form-control">
+      </div>
+      <div class="form-group">
+        <input type="password" id="password" placeholder="Password" class="form-control">
+      </div>
+
+      <button id="submit" class="btn btn-outline-success btn-lg shadow">Submit</button>
+
+    </div>
+
+  </div>
+
+  <script type="module">
+
+    import {initializeApp} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-app.js";
+    import {getDatabase, ref, set} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-database.js";
+    import {getAuth, signInWithEmailAndPassword} from "https://www.gstatic.com/firebasejs/10.4.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyCK5rIsGu_yccBU7mfd75Zt9IFWZBz-iRY",
+      authDomain: "ecoscore-uber.firebaseapp.com",
+      projectId: "ecoscore-uber",
+      storageBucket: "ecoscore-uber.appspot.com",
+      messagingSenderId: "310324664354",
+      appId: "1:310324664354:web:547de9a9ea72e1c2f7927b"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase();
+    const auth = getAuth();
+    var email = "";
+    var id = null
+
+    function login() {
+      email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      const auth = getAuth();
+      if (email != "" && password != "") {
+        signInWithEmailAndPassword(auth, email, password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            localStorage.setItem('id', user.uid);
+            window.location.href = "main.html";
+          })
+          .catch((error) => {
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            alert(errorMessage);
+          });
+
+      } else {
+        alert("Missing Information");
+        return;
+      }
+    }
+
+    var submit = document.getElementById("submit");
+    submit.addEventListener("click", login);
+
+
+
+
+
+
+
+  </script>
+
+</body>
+
+</html>

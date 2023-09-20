@@ -1,0 +1,324 @@
+<!-- 
+Author: Vihaan Sharma
+Project: Driver EcoScore for Uber Hackathon
+-->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Driver EcoScore - Transportation</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.5.0/semantic.min.css"
+    integrity="sha512-KXol4x3sVoO+8ZsWPFI/r5KBVB/ssCGB5tsv2nVOKwLg33wTFP3fmnXa47FdSVIshVTgsYk/1734xSk9aFIa4A=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico" />
+  <link rel="stylesheet" href="style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <h1 class="ui center aligned white inverted block header">
+    Driver EcoScore
+    <a href="main.html"> <button class="ui right floated red button" fdprocessedid="30c1d8">Back</button></a>
+  </h1>
+  <div class="quiz">
+    <div class="ui cards">
+      <div class="card">
+        <div class="content">
+          <div class="header">What is your main method of transportation?</div>
+          <div class="description">
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="1" class="QA 1644" onclick="resulting('QA')">
+                <label>Car</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="1" class="QA 640" onclick="resulting('QA')">
+                <label>Electric Car</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="1" class="QA 4980" onclick="resulting('QA')">
+                <label>Bus</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="1" class="QA 4720" onclick="resulting('QA')">
+                <label>Metro</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="1" class="QA 181" onclick="resulting('QA')">
+                <label>Motorcycle</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="1" class="QA 0" onclick="resulting('QA')">
+                <label>Walking / Biking</label>
+              </div>
+            </div>
+            <div class="field">
+              <div class="ui radio checkbox">
+                <input type="radio" name="1" class="QA 227" onclick="resulting('QA')">
+                <label>Electric scooter/Electric Bike</label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <span>
+      <div class="ui cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">How many times a week do you use this method of transportation?</div>
+            <div class="description">
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="2" class="QB 0" onclick="resulting('QB')">
+                  <label>0</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="2" class="QB 2" onclick="resulting('QB')">
+                  <label>1-3</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="2" class="QB 5.5" onclick="resulting('QB')">
+                  <label>4-7</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="2" class="QB 11" onclick="resulting('QB')">
+                  <label>8-14</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="2" class="QB 18" onclick="resulting('QB')">
+                  <label>15-22</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="2" class="QB 25" onclick="resulting('QB')">
+                  <label>23-28</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="2" class="QB 40" onclick="resulting('QB')">
+                  <label>29+</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </span>
+    <span>
+      <div class="ui cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">Average miles per gallon (if applicable)</div>
+            <div class="description">
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="3" class="QC 4" onclick="resulting('QC')">
+                  <label>1-5</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="3" class="QC 7" onclick="resulting('QC')">
+                  <label>6-10</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="3" class="QC 16" onclick="resulting('QC')">
+                  <label>11-20</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="3" class="QC 23" onclick="resulting('QC')">
+                  <label>21-30</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="3" class="QC 40" onclick="resulting('QC')">
+                  <label>30-45</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="3" class="QC 60" onclick="resulting('QC')">
+                  <label>45-70</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="3" class="QC 85" onclick="resulting('QC')">
+                  <label>70+</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="3" class="QC 100" onclick="resulting('QC')">
+                  <label>Not applicable - I use an electric vehicle</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="3" class="QC 0" onclick="resulting('QC')">
+                  <label>Not applicable - I walk / bike</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
+    <span>
+      <div class="ui cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">How much distance you average per trip (miles) </div>
+            <div class="description">
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="4" class="QD 0.5" onclick="resulting('QD')">
+                  <label>0-1</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="4" class="QD 1.5" onclick="resulting('QD')">
+                  <label>1-2</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="4" class="QD 3" onclick="resulting('QD')">
+                  <label>2-4</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="4" class="QD 8" onclick="resulting('QD')">
+                  <label>5-10</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="4" class="QD 13" onclick="resulting('QD')">
+                  <label>10-15</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="4" class="QD 20" onclick="resulting('QD')">
+                  <label>15-25</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="4" class="QD 32" onclick="resulting('QD')">
+                  <label>25-40</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="4" class="QD 50" onclick="resulting('QD')">
+                  <label>40-60</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="4" class="QD 70" onclick="resulting('QD')">
+                  <label>60+</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
+    <span>
+      <div class="ui cards">
+        <div class="card">
+          <div class="content">
+            <div class="header">Number of people your vehicle typically transports (on average)</div>
+            <div class="description">
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="5" class="QE 1" onclick="resulting('QE')">
+                  <label>1</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="5" class="QE 2.5" onclick="resulting('QE')">
+                  <label>2-3</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="5" class="QE 5.5" onclick="resulting('QE')">
+                  <label>4-8</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="5" class="QE 11" onclick="resulting('QE')">
+                  <label>8-15</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="5" class="QE 25" onclick="resulting('QE')">
+                  <label>15-30</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="5" class="QE 75" onclick="resulting('QE')">
+                  <label>30-100</label>
+                </div>
+              </div>
+              <div class="field">
+                <div class="ui radio checkbox">
+                  <input type="radio" name="5" class="QE 150" onclick="resulting('QE')">
+                  <label>100+</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </span>
+  </div>
+  <center><a href="graphpage.html"><button class="ui green button">Submit</button></a></center>
+  <script src="script.js"></script>
+
+</body>
+
+
+</html>
