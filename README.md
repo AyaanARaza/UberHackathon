@@ -19,3 +19,7 @@ Usage:
 2. It is recommended to take the quiz (Transportation Habits) as it pertains to the project
 3. EcoScore will calculate your environmental score with the other users and present it to you. 
 4. You can retake the quiz after making changes to your transportation habits and see your new ecoscore.
+
+Note:
+1. We are using Firebase DB for this project.
+2. We have kept access to our DB in this project for this hackathon.
